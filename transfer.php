@@ -1,17 +1,17 @@
 <?php
-// For Debug //
+// For Debug // Uncomment this in production
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 //echo "Seen";
 ///////////////
-require_once ('includes/common.php');
-require_once ('includes/process.php');
+require_once ('includes/common.php'); // contains commonly used functions and constants
+require_once ('includes/process.php'); // Contains the Central Processing file
 
-use Process\initiateTransfer;
-use Process\finalizeTransfer;
+use Process\initiateTransfer; // Class for Initiating a Transfer
+use Process\finalizeTransfer; // Class for Finalizing a Transfer
 
-if (!empty($_POST['otp'])){
+if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
 
   if ($finalize_transfer = new Process\finalizeTransfer($_POST['t_code'], $_POST['otp'])){
     $ref_code = $finalize_transfer->transfer();
@@ -21,13 +21,14 @@ if (!empty($_POST['otp'])){
     }
   }
 
+  // HTML displayed on success . # Test this after you transfer some money!!!
   $html = '
   <div class="card-body">
       <img src="images/success.gif" alt="Transfer Successful" class="img-fluid">
   </div>
   ';
 
-} elseif (!empty($_POST['recipient_code'])){
+} elseif (!empty($_POST['recipient_code'])){ // If user Initiated a Transfer (The only time this page is loaded with $_POST['recipient_code'])
 
   if ($initiate_transfer = new Process\initiateTransfer($_POST['reason'], $_POST['amount'], $_POST['recipient_code'])){
     $code = $initiate_transfer->transfer();
@@ -41,7 +42,7 @@ if (!empty($_POST['otp'])){
   }
 
   
-  
+  // Display page for OTP input
   $html = '
   <div class="card-header">Input the <strong class="text-info">OTP</strong> code that will be sent to you shortly</div>
       <div class="card-body">

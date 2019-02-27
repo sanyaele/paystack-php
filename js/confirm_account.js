@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#account_number').keyup(function() {
+    $('#account_number').keyup(function() { 
         var accnum = $(this).val();
         if (accnum.length == 10) {
             var bank_code = $('#bank').children("option:selected").val();

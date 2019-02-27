@@ -9,7 +9,7 @@ class showSupplies {
 
     function __construct(){
         global $link;
-        $this->dblink = $link;
+        $this->dblink = $link; // Insert $link as a global variable
 
     }
 
@@ -27,20 +27,20 @@ class showSupplies {
         $result = @mysqli_query($db, $sql);
         $response = "";
         while ($rows = @mysqli_fetch_assoc($result)){
-            $response .= $this->$function($rows);
+            $response .= $this->$function($rows); // this functions enables extension of this class and adding another output
         }
 
         return $response;
     }
 
-    function make_table ($rows){
+    function make_table ($rows){ // Display supplies table on index.php
         if (($rows['supply_type'] == 'prepaid' 
         && $rows['status'] == 'initiated') ||
         ($rows['supply_type'] == 'postpaid' 
-        && $rows['status'] == 'supplied')){
+        && $rows['status'] == 'supplied')){ // Only display Prepaid supplies that have been initiated and Postpaid supplies that have been delivered
             $pay = '<a href="pay.php?supply_id='.$rows['id'].'" target="pay_frame"> 
             <small data-toggle="modal" data-target="#payModal">Pay</small>
-            </a>';
+            </a>'; // Open the transfer iframe in a Modal window
         } else {
             $pay = '<small class="text-danger">Pay</small>';
         }
@@ -62,7 +62,7 @@ class showSupplies {
     }
 }
 
-class getSupply {
+class getSupply { // Get the details of a single supply
     public $dblink;
     private $supply_id;
 

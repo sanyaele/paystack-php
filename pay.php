@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 /////////////////////////////////////
 require_once ('includes/session_mini.php');
 require_once ('includes/common.php');
@@ -35,7 +32,6 @@ $supply = $get_supply->get_supply_details($link);
 $_SESSION['supply_id'] = $supply['id'];
 $_SESSION['supplier_id'] = $supply['supplier_id'];
 
-print_r ($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +56,17 @@ print_r ($_SESSION);
     }
     #others {
       display: none;
+    }
+    .left-inner-addon {
+        position: relative;
+    }
+    .left-inner-addon input {
+        padding-left: 40px;    
+    }
+    .left-inner-addon span {
+        position: absolute;
+        padding: 7px 12px;
+        pointer-events: none;
     }
   </style>
 </head>
@@ -95,9 +102,9 @@ print_r ($_SESSION);
             
             <div class="form-group">
               <label for="amount">Amount</label>
-              <div class="input-group"> 
-                  <span class="input-group-addon">NGN</span>
-                  <input type="number" value="<?php echo $supply['amount']; ?>" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" />
+              <div class="input-group left-inner-addon"> 
+                  <span>NGN</span>
+                  <input type="number" value="<?php echo number_format($supply['amount'], 2, ".", ""); ?>" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" />
               </div>
             </div>
 

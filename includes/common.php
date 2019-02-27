@@ -1,9 +1,13 @@
 <?php // common.php
+///// Disable below in production
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 /// CONSTANTS /////
 define('testKey', 'sk_test_65b67291a1f77372d1bd4304145784cf88c9aa0d');
 
 //////////////////////////////////////////////////////////
-function curl_get ($url){
+function curl_get ($url){ 
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
@@ -51,7 +55,7 @@ function curl_post ($url, $data){
 }
 
 ///////////////////////////////
-function error($msg) { 
+function error($msg) { // Alert error mesage
    echo "
    <html> 
    <head> 
@@ -111,12 +115,12 @@ function random_str($numchar) {
    return($encr_str);
 }
 #############################################################################
-function get_number ($number){
+function get_number ($number){ // Properly format phone numbers. There is a better way
 	$number = "0".substr($number,-10);
 	return $number;
 }
 #############################################################################
-function get_pass ($password=""){
+function get_pass ($password=""){ // Password Hash
 	if (empty($password)):
 		$password = substr (MD5(time()), 0, 6);
 	endif;

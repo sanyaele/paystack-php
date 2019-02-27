@@ -1,10 +1,4 @@
 <?php
-// For Debug //
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//echo "Seen";
-///////////////
 require_once ('../includes/session_mini.php');
 require_once ('../includes/common.php');
 require_once ('../includes/process.php');

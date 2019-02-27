@@ -1,11 +1,8 @@
 <?php
 namespace Process;
 
-
+// Get List of Banks with their Bank codes
 class getBanks {
-    function __construct(){
-
-    }
 
     public function banks ($output="dropdown"){
         $out="";
@@ -21,12 +18,12 @@ class getBanks {
         return $out;
     }
 
-    function dropdown ($banks){
+    function dropdown ($banks){ // Create dropdown of banks list
         return '<option value="'.$banks['code'].'">'.$banks['name'].'</option>'."\n";
     }
 }
 
-
+// Get client Account Details
 class getACCount {
     function getAcc ($acc_num, $bank_code){
         $tranx = curl_get("https://api.paystack.co/bank/resolve?account_number=".$acc_num."&bank_code=".$bank_code);
@@ -39,6 +36,7 @@ class getACCount {
     }
 }
 
+// Add new or existing recipients
 class addRecipient {
     public $dblink;
     private $type = "nuban";
@@ -52,7 +50,7 @@ class addRecipient {
 
     function __construct(){
         global $link;
-        $this->dblink = $link;
+        $this->dblink = $link; // insert the global $link into this class
 
         if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['account_number']) && !empty($_POST['bank_code'])){
             $this->name = $this->data['name']= addslash($_POST['name']);

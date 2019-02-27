@@ -4,8 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-require_once 'includes/admin_sess_control.php';
-require_once 'includes/supplies.php';
+require_once 'includes/admin_sess_control.php'; // Admin session file
+
+require_once 'includes/supplies.php'; // Unpaid Supplies list file
 
 use Supply\showSupplies;
 ?>
