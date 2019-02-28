@@ -2,13 +2,13 @@
 session_start();////////
 
 
-$d_base = $_SERVER['DOCUMENT_ROOT']."/bakery";
+// $d_base = $_SERVER['DOCUMENT_ROOT']."/bakery";
 ////////////////////////
 
 
-require_once ($d_base.'/includes/db.php');
-require_once ($d_base.'/includes/common.php');
-require_once ($d_base.'/includes/session_control.php');
+require_once ('db.php');
+require_once ('common.php');
+require_once ('session_control.php');
 ////==============//////
 
 function session_page ($error_mess) {
