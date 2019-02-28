@@ -173,10 +173,12 @@ class finalizeTransfer {
     function update_db ($db, $ref){
         $sql = "UPDATE `supplies` SET
         `status` = 'paid',
-        `payment_reference_id` = '$ref',
+        `paid` = 'yes',
+        `payment_reference_id` = '".$ref."',
         `payment_date` = NOW()
         WHERE 
         `id` = '".$_SESSION['supply_id']."'";
+        echo $sql;
         if (@mysqli_query($db, $sql)){
             return TRUE;
         } else {

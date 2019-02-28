@@ -5,6 +5,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 //echo "Seen";
 ///////////////
+require_once ('includes/session_mini.php'); // Mini Session
+require_once ('includes/db.php'); // Database link
 require_once ('includes/common.php'); // contains commonly used functions and constants
 require_once ('includes/process.php'); // Contains the Central Processing file
 
@@ -19,14 +21,19 @@ if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
       echo $ref_code;
       exit();
     }
+    
+    // HTML displayed on success . # Test this after you transfer some money!!!
+    $html = '
+    <div class="card-body">
+        <img src="images/success.gif" alt="Transfer Successful" class="img-fluid">
+    </div>
+    <div class="card-footer">
+      Your transfer was successful <a href="index.php" class="btn btn-info" target="_top">Continue</a>
+    </div>
+    '.$ref_code;
   }
 
-  // HTML displayed on success . # Test this after you transfer some money!!!
-  $html = '
-  <div class="card-body">
-      <img src="images/success.gif" alt="Transfer Successful" class="img-fluid">
-  </div>
-  ';
+  
 
 } elseif (!empty($_POST['recipient_code'])){ // If user Initiated a Transfer (The only time this page is loaded with $_POST['recipient_code'])
 
@@ -52,11 +59,13 @@ if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
             <input class="form-control" id="otp" name="otp" type="text" pattern="[0-9]{6}">
           </div>
           <input type="hidden" name="t_code" id="t_code" value="'.$code.'">
-          <input type="submit" class="btn btn-success btn-block" value="Authorize Payment" disabled>
+          <input type="submit" class="btn btn-success btn-block" value="Authorize Payment">
         </form>
       </div>
   ';
 
+} else {
+  header("Location: pay.php?supply_id=".$_SESSION['supply_id']);
 }
 
 
@@ -94,6 +103,7 @@ if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
 </body>
 
 </html>

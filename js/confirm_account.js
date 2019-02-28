@@ -24,9 +24,12 @@ $(document).ready(function(){
                           })
                             .done(function( rid ) {
                               if(rid != 'Error!'){
-                                alert("User has been added to your recipients. Recipient Code: " + rid );
+                                alert("User has been added to your recipients." );
                                 $('#recipient_code').val(rid); 
                                 $('#others').show();
+
+                                // Enable disabled after confirming recipient
+                                $("input[type=submit]").removeAttr("disabled");  
                               } else {
                                 alert("Error: We couldn't add " + accname + " as a Fund recipient");
                               }
@@ -37,8 +40,7 @@ $(document).ready(function(){
                                 alert("Request failed: " + xhr.responseText );
                               });
 
-                        // Enable disabled after confirming recipient
-                        $("input[type=submit]").removeAttr("disabled");  
+                        
                     }
                     
                 }

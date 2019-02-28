@@ -67,6 +67,7 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
         position: absolute;
         padding: 7px 12px;
         pointer-events: none;
+        font-size: 14px;
     }
   </style>
 </head>
@@ -74,7 +75,7 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
 <body class="bg-light">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Your Current account balance is <strong class="text-danger"><?php echo $bal['data'][0]['currency'].number_format($bal["data"][0]["balance"], 2, ".", ","); ?></strong></div>
+      <div class="card-header">Your Current account balance is <strong class="text-danger"><?php echo $bal['data'][0]['currency'].number_format($bal["data"][0]["balance"]/100, 2, ".", ","); ?></strong></div>
       <div class="card-body">
         <small>Pay <strong><?php echo $supply['supplier_name']; ?></strong> <strong class="text-info">N<?php echo number_format($supply['amount'], 2, ".", ","); ?></strong>
          for <?php echo $supply['quantity_desc']; ?> of <strong><?php echo $supply['item_name']; ?></strong></small>
@@ -104,7 +105,7 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
               <label for="amount">Amount</label>
               <div class="input-group left-inner-addon"> 
                   <span>NGN</span>
-                  <input type="number" value="<?php echo number_format($supply['amount'], 2, ".", ""); ?>" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" />
+                  <input type="number" value="<?php echo number_format($supply['amount'], 2, ".", ""); ?>" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="amount" name="amount" />
               </div>
             </div>
 
