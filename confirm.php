@@ -34,7 +34,7 @@ http_response_code(200);
 
 // parse event (which is json string) as object
 // Do something - that will not take long - with $event
-$event = json_decode($input);
+$event = json_decode($input, true);
 
 
 if ($event['event'] == "transfer.success"){
