@@ -94,6 +94,7 @@ class addRecipient {
 }
 
 class initiateTransfer {
+    public $dblink;
     private $source = "balance";
     private $reason;
     private $amount;
@@ -102,6 +103,9 @@ class initiateTransfer {
     private $data = array();
 
     function __construct($reason, $amount, $recipient){
+        global $link;
+        $this->dblink = $link;
+
         if (!empty($reason) && !empty($amount) && !empty($recipient)){
             $this->reason = $this->data['reason']= addslash($reason);
             $this->amount = $this->data['amount'] = addslash($amount) * 100;
@@ -123,9 +127,23 @@ class initiateTransfer {
         $tranx = curl_post('https://api.paystack.co/transfer', $this->data);
 
         if (!empty($tranx['data']['transfer_code'])){
+            $this->update_transfer_code($this->dblink, $tranx['data']['transfer_code']); // Add transfer code, useful for confirmation
             return $tranx['data']['transfer_code'];
         } else {
             return "Error: " . $tranx['message'];
+        }
+    }
+
+    function update_transfer_code ($db, $ref){
+        $sql = "UPDATE `supplies` SET
+        `transfer_code` = '".$ref."'
+        WHERE 
+        `id` = '".$_SESSION['supply_id']."'";
+        // echo $sql;
+        if (@mysqli_query($db, $sql)){
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
 }
@@ -178,7 +196,7 @@ class finalizeTransfer {
         `payment_date` = NOW()
         WHERE 
         `id` = '".$_SESSION['supply_id']."'";
-        echo $sql;
+        // echo $sql;
         if (@mysqli_query($db, $sql)){
             return TRUE;
         } else {
