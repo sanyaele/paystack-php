@@ -30,7 +30,7 @@ if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
     <div class="card-footer">
       Your transfer was successful <a href="index.php" class="btn btn-info" target="_top">Continue</a>
     </div>
-    '.$ref_code;
+    ';
   }
 
   
