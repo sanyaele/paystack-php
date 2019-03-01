@@ -55,7 +55,6 @@ if (!empty($_POST['otp'])){ // If user submitted an OTP for The Tranfer
       <div class="card-body">
       <form action="'.$_SERVER['PHP_SELF'].'" method="post">
           <div class="form-group">
-            <label for="otp">OTP</label>
             <input class="form-control" id="otp" name="otp" type="text" pattern="[0-9]{6}">
           </div>
           <input type="hidden" name="t_code" id="t_code" value="'.$code.'">
