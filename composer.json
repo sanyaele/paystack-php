@@ -1,6 +1,4 @@
 {
-    "name": "PayStack Test",
-    "description": "The Paystack Interview",
     "require": {
         "yabacon/paystack-php": "^2.1",
         "twbs/bootstrap": "4.0.*",
