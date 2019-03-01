@@ -1,5 +1,13 @@
 {
+    "name": "PayStack Test",
+    "description": "The Paystack Interview",
     "require": {
-        "yabacon/paystack-php": "^2.1"
+        "yabacon/paystack-php": "^2.1",
+        "twbs/bootstrap": "4.0.*",
+        "datatables/datatables": "^1.10.16",
+        "nnnick/chartjs": "^2.7.1",
+        "components/font-awesome": "4.7.*",
+        "components/jquery": "3.3.*",
+        "gymadarasz/jquery.easing": "^1.3"
     }
 }
