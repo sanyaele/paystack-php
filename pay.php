@@ -75,7 +75,7 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
 <body class="bg-light">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Your Current account balance is <strong class="text-danger"><?php echo $bal['data'][0]['currency'].number_format($bal["data"][0]["balance"]/100, 2, ".", ","); ?></strong></div>
+      <div class="card-header">Your Current account balance = <strong class="text-danger"><?php echo $bal['data']['currency'].number_format($bal["data"]["balance"]/100, 2, ".", ","); ?></strong></div>
       <div class="card-body">
         <small>Pay <strong><?php echo $supply['supplier_name']; ?></strong> <strong class="text-info">N<?php echo number_format($supply['amount'], 2, ".", ","); ?></strong>
          for <?php echo $supply['quantity_desc']; ?> of <strong><?php echo $supply['item_name']; ?></strong></small>
