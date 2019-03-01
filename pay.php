@@ -19,7 +19,7 @@ use Supply\getSupply;
 $get_banks = new Process\getBanks;
 
 // Get Balance on Paystack
-$bal = curl_get ("//api.paystack.co/balance");
+$bal = curl_get ("https://api.paystack.co/balance");
 // print_r($bal);
 
 // Get new supply object
@@ -75,7 +75,7 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
 <body class="bg-light">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Your Current account balance = <strong class="text-danger"><?php echo $bal['data']['currency'].number_format($bal["data"]["balance"]/100, 2, ".", ","); ?></strong></div>
+      <div class="card-header">Your Current account balance is <strong class="text-danger"><?php echo $bal['data'][0]['currency'].number_format($bal["data"][0]["balance"]/100, 2, ".", ","); ?></strong></div>
       <div class="card-body">
         <small>Pay <strong><?php echo $supply['supplier_name']; ?></strong> <strong class="text-info">N<?php echo number_format($supply['amount'], 2, ".", ","); ?></strong>
          for <?php echo $supply['quantity_desc']; ?> of <strong><?php echo $supply['item_name']; ?></strong></small>
@@ -121,11 +121,14 @@ $_SESSION['supplier_id'] = $supply['supplier_id'];
     </div>
   </div>
   <!-- Bootstrap core JavaScript-->
-  <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+  <!-- <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
     <!-- Core plugin JavaScript-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>  
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
     <script src="js/confirm_account.js"></script>
 </body>
 
