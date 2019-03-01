@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 27, 2019 at 02:10 PM
+-- Generation Time: Mar 01, 2019 at 01:21 PM
 -- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.2.15-0ubuntu0.18.04.1
 
@@ -74,11 +74,11 @@ INSERT INTO `items` (`id`, `item_name`, `date_added`) VALUES
 
 CREATE TABLE `payment` (
   `id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `supplier_id` int(11) NOT NULL,
+  `payment_reference_id` varchar(50) NOT NULL,
+  `status` enum('success','failed','') NOT NULL,
   `amount` int(11) NOT NULL,
   `confirmation` enum('True','False') NOT NULL DEFAULT 'False',
-  `date_paid` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -141,6 +141,7 @@ CREATE TABLE `suppliers_banks` (
 CREATE TABLE `supplies` (
   `id` int(11) NOT NULL,
   `payment_reference_id` varchar(50) NOT NULL,
+  `transfer_code` varchar(50) NOT NULL,
   `item_id` int(11) NOT NULL,
   `supplier_id` int(11) NOT NULL,
   `status` enum('initiated','supplied','paid','cancelled','returned') NOT NULL DEFAULT 'initiated',
@@ -157,13 +158,13 @@ CREATE TABLE `supplies` (
 -- Dumping data for table `supplies`
 --
 
-INSERT INTO `supplies` (`id`, `payment_reference_id`, `item_id`, `supplier_id`, `status`, `quantity_desc`, `amount`, `supply_type`, `paid`, `supply_order_date`, `supply_date`, `payment_date`) VALUES
-(1, '', 1, 1, 'supplied', '50kg', 30000, 'postpaid', 'no', '2019-02-23 08:34:48', '2019-02-23 08:34:48', '2019-02-23 08:34:48'),
-(2, '', 1, 2, 'initiated', '125kg', 70000, 'prepaid', 'no', '2019-02-23 08:59:45', NULL, NULL),
-(3, '', 2, 3, 'initiated', '100kg', 100000, 'postpaid', 'no', '2019-02-23 09:01:26', NULL, NULL),
-(4, '', 2, 4, 'initiated', '100', 90000, 'prepaid', 'no', '2019-02-23 09:01:26', NULL, NULL),
-(5, '', 3, 5, 'initiated', '10', 7000, 'prepaid', 'no', '2019-02-23 09:03:30', NULL, NULL),
-(6, '', 3, 6, 'initiated', '18kg', 20000, 'prepaid', 'no', '2019-02-23 09:03:30', NULL, NULL);
+INSERT INTO `supplies` (`id`, `payment_reference_id`, `transfer_code`, `item_id`, `supplier_id`, `status`, `quantity_desc`, `amount`, `supply_type`, `paid`, `supply_order_date`, `supply_date`, `payment_date`) VALUES
+(1, '', '', 1, 1, 'supplied', '50kg', 30000, 'postpaid', 'no', '2019-02-23 08:34:48', '2019-02-23 08:34:48', '2019-02-23 08:34:48'),
+(2, '', '', 1, 2, 'initiated', '125kg', 70000, 'prepaid', 'no', '2019-02-23 08:59:45', NULL, NULL),
+(3, '', '', 2, 3, 'initiated', '100kg', 10000, 'postpaid', 'no', '2019-02-23 09:01:26', NULL, NULL),
+(4, '', '', 2, 4, 'initiated', '100', 9000, 'prepaid', 'no', '2019-02-23 09:01:26', NULL, NULL),
+(5, '$ref', '', 3, 5, 'paid', '10', 7000, 'prepaid', 'yes', '2019-02-23 09:03:30', NULL, '2019-02-28 15:19:04'),
+(6, '', '', 3, 6, 'initiated', '18kg', 20000, 'prepaid', 'no', '2019-02-23 09:03:30', NULL, NULL);
 
 --
 -- Indexes for dumped tables
